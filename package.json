@@ -25,10 +25,7 @@
     "react-toastify": "^10.0.4"
   },
   "devDependencies": {
-<<<<<<< HEAD
-=======
     "@material-ui/core": "^5.4.0",
->>>>>>> 0171bc6848cdc53c76e33dcffdb6a7af749b5967
     "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.56.0",
     "eslint-plugin-react": "^7.33.2",
