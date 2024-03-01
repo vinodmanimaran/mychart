@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Button, Dialog, DialogContent, DialogActions, TextField } from '@mui/material';
 import axios from 'axios';
 
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 
 const API_URL = "https://backend-api-u4m5.onrender.com" || "http://localhost:4040";
@@ -35,16 +33,16 @@ const CreateAgent = () => {
   const handleSubmit = async () => {
     try {
       if (!formData.name || !formData.email || !formData.contactNumber || !formData.location) {
-        toast.error('All fields are required');
+        alert('All fields are required');
         return;
       }
       const response = await axios.post(`${API_URL}/agent/createagents`, formData);
       console.log(response.data); 
-      toast.success("Agent Created successfully")
+    alert("Agent Created successfully")
       handleClose();
     } catch (error) {
       console.error('Error creating agent:', error);
-      toast.error('Error creating agent');
+      alert('Error creating agent');
       setError('An error occurred while creating the agent');
     }
   };
@@ -93,7 +91,6 @@ const CreateAgent = () => {
           <Button onClick={handleSubmit}>Create</Button>
         </DialogActions>
       </Dialog>
-      <ToastContainer/>
     </div>
   );
 };
