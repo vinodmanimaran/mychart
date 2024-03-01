@@ -4,8 +4,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
 import { Link as RouterLink } from 'react-router-dom';
-
-const drawerWidth = 240;
+import './Layout.css'
+const drawerWidth = 250;
 
 const Layout = ({ children }) => {
   const [open, setOpen] = useState(false);
@@ -19,8 +19,8 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <div>
-      <AppBar position="fixed">
+    <div className='appbar'>
+      <AppBar position="sticky">
         <Toolbar>
           <IconButton
             color="inherit"
