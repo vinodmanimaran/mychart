@@ -9,7 +9,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Layout from '../../components/Layout/Layout'
 import axios from 'axios';
-import DataTable from '../../DataTable/DataTable';
+import DataTable from '../../components/DataTable/DataTable';
 
 const API_URL = "https://backend-api-u4m5.onrender.com" || "http://localhost:4040";
 

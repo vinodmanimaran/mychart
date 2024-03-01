@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Grid, Card, CardHeader, Divider, CardContent, Typography, LinearProgress } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
+import { Grid, Card, CardHeader, Divider, CardContent, Typography, LinearProgress } from '@mui/material';
+
 
 const API_URL = "https://backend-api-u4m5.onrender.com" || "http://localhost:4040";
 
 
 const ProgressData = () => {
-  const theme = useTheme();
   const [dashboardData, setDashboardData] = useState(null);
   const gridSpacing = 2; // Define grid spacing as per your requirement
 
