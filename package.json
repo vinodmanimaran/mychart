@@ -19,9 +19,9 @@
     "apexcharts": "^3.46.0",
     "axios": "^1.6.7",
     "mui-datatables": "^4.3.0",
-    "react": "^17.0.0 || ^18.0.0",
+    "react": "^16.13.0",
     "react-apexcharts": "^1.4.1",
-    "react-dom": "^18.2.0",
+    "react-dom": "^16.13.0",
     "react-router-dom": "^6.22.2",
     "react-toastify": "^10.0.4"
   },
@@ -34,10 +34,5 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "vite": "^5.1.4"
-  },
-  "peerDependencies": {
-    "react": "^17.0.0 || ^18.0.0",
-    "react-dom": "^17.0.0 || ^18.0.0"
-
   }
 }
