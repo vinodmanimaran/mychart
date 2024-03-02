@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Grid, Card, CardHeader, CardContent, Typography, Divider } from '@mui/material';
+import { Grid, Card, CardHeader, CardContent, Typography, Divider, Skeleton } from '@mui/material';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 import styled from '@emotion/styled';
 import { useTheme } from '@emotion/react';
 
 import SalesLineCard from './SalesLineCard';
-
 
 const API_URL = "https://backend-api-u4m5.onrender.com" || "http://localhost:4040";
 
@@ -22,8 +21,27 @@ const FlatCardBlock = styled(Grid)(({ theme }) => ({
   }
 }));
 
+const SkeletonLoading = () => {
+  return (
+    <div style={{ margin: '20px' }}>
+      <Card>
+        <CardContent>
+          <Grid container spacing={2}>
+            {[1, 2, 3].map((item) => (
+              <Grid item xs={12} sm={4} key={item}>
+                <div style={{ padding: '20px', borderRadius: '5px', backgroundColor: '#f0f0f0' }} />
+              </Grid>
+            ))}
+          </Grid>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
+
 const LeadsOvertime = () => {
   const [dashboardData, setDashboardData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const theme = useTheme();
 
   useEffect(() => {
@@ -31,6 +49,7 @@ const LeadsOvertime = () => {
       try {
         const response = await axios.get(`${API_URL}/dashboard`);
         setDashboardData(response.data);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching revenue chart data:', error);
       }
@@ -93,20 +112,21 @@ const LeadsOvertime = () => {
   return (
     <div>
       <Grid container spacing={gridSpacing}>
-        <Grid item xs={12} sm={12}>
-          <Card style={{ marginTop: "30px", marginLeft: "20px" }}>
+      <Grid item xs={12} sm={12}>
+          <Card style={{ marginTop: "30px", marginLeft: "20px" }} sx={{
+      margin: "0.5rem",
+      boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.3), 0px 8px 16px rgba(0, 0, 0, 0.3)", 
+    }}>
             <CardHeader
-              title={
-                <Typography component="div" className="card-header">
-                  Leads Generation Over Time
-                </Typography>
-              }
+              title={loading ? <Skeleton variant="text" /> : "Leads Over Time"}
             />
             <Divider />
             <CardContent>
               <Grid container spacing={gridSpacing}>
                 <Grid item xs={12}>
-                  {dashboardData && (
+                  {loading ? (
+                    <Skeleton variant="rect" height={200} />
+                  ) : (
                     <SalesLineCard
                       chartData={generateChartData(dashboardData)}
                       title="Leads Generation Over Time"
@@ -131,32 +151,36 @@ const LeadsOvertime = () => {
         </Grid>
 
         <Grid item xs={12} sx={{ display: { md: 'block', sm: 'none' } }}>
-          <Card>
-            <CardContent sx={{ p: '0 !important' }}>
-              <Grid container alignItems="center" spacing={0}>
-                {dashboardData && Object.entries(dashboardData.leadsCount).map(([service, count]) => (
-                  <FlatCardBlock key={service}>
-                    <Grid container alignItems="center" spacing={1}>
-                      <Grid item>
-                        <Typography variant="subtitle4" align="left" sx={{ fontSize: "11px" }}>
-                          {service.toUpperCase()}
-                        </Typography>
+          {dashboardData ? (
+            <Card>
+              <CardContent sx={{ p: '0 !important' }}>
+                <Grid container alignItems="center" spacing={0}>
+                  {Object.entries(dashboardData.leadsCount).map(([service, count]) => (
+                    <FlatCardBlock key={service}>
+                      <Grid container alignItems="center" spacing={1}>
+                        <Grid item>
+                          <Typography variant="subtitle4" align="left" sx={{ fontSize: "11px" }}>
+                            {service.toUpperCase()}
+                          </Typography>
+                        </Grid>
+                        <Grid item sm zeroMinWidth>
+                          <Typography variant="h5" sx={{ color: theme?.palette?.error?.main }} align="right">
+                            {count}
+                          </Typography>
+                        </Grid>
                       </Grid>
-                      <Grid item sm zeroMinWidth>
-                        <Typography variant="h5" sx={{ color: theme?.palette?.error?.main }} align="right">
-                          {count}
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  </FlatCardBlock>
-                ))}
-              </Grid>
-            </CardContent>
-          </Card>
+                    </FlatCardBlock>
+                  ))}
+                </Grid>
+              </CardContent>
+            </Card>
+          ) : (
+            <Skeleton variant='square' />
+          )}
         </Grid>
       </Grid>
     </div>
-  )
-}
+  );
+};
 
 export default LeadsOvertime;

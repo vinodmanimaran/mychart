@@ -29,7 +29,10 @@ const SalesLineCard = ({ bgColor, chartData, footerData, icon, title, percentage
   }
 
   return (
-    <Card>
+    <Card sx={{
+      margin: "0.5rem",
+      boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.3), 0px 8px 16px rgba(0, 0, 0, 0.3)", 
+    }}>
       <CardContent sx={{ padding: 0, paddingBottom: '0 !important' }}>
         <Box color="#fff" bgcolor={bgColor ? bgColor : theme.palette.primary.main} p={3}>
           <Grid container direction="column" spacing={1}>

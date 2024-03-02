@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { CircularProgress} from '@mui/material';
+import { Skeleton } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import axios from 'axios';
 import { makeStyles } from '@mui/styles';
@@ -8,7 +8,6 @@ import CreateAgent from '../CreateAgent.jsx/CreateAgent';
 
 const useStyles = makeStyles({
   root: {
-    border: '1px solid red',
     borderRadius: '5px',
     boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
     '& .MuiPaper-root': {
@@ -26,21 +25,20 @@ const useStyles = makeStyles({
   },
 });
 
-
 const API_URL = "https://backend-api-u4m5.onrender.com" || "http://localhost:4040";
 
-
 const Agenttable = () => {
+  const classes = useStyles(); // Correct usage of useStyles
+
   const [agents, setAgents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-//   const classes = useStyles();
+  const [skeletonLoading, setSkeletonLoading] = useState(true); // State for skeleton loading
 
   useEffect(() => {
     const fetchAgents = async () => {
       try {
         const response = await axios.get(`${API_URL}/agent/getallagent`);
-        console.log(response.data.agents)
         setAgents(response.data.agents);
         setLoading(false);
       } catch (error) {
@@ -53,10 +51,16 @@ const Agenttable = () => {
     fetchAgents();
   }, []);
 
-  
+  useEffect(() => {
+    // Simulate a short delay for skeleton loading
+    const skeletonTimer = setTimeout(() => {
+      setSkeletonLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(skeletonTimer);
+  }, []);
 
   const columns = [
-
     {
       name:"agentId",
       label:"agentId"
@@ -88,8 +92,6 @@ const Agenttable = () => {
     }
   ];
 
-  if (loading) return <CircularProgress />;
-
   if (error) return <div>{error}</div>;
 
   const options = {
@@ -109,21 +111,32 @@ const Agenttable = () => {
   };
 
   return (
-    < div className='container'>
-    <div className="btn">
-    <CreateAgent/>
-
+    <div className={`container ${classes.root}`}> {/* Correct usage of classes */}
+      <div className="btn">
+        <CreateAgent/>
+      </div>
+      <div> {/* Removed incorrect usage of useStyles */}
+        {skeletonLoading ? (
+          // Skeleton loading
+          <div>
+             <Skeleton variant="text" height={50} />
+            <Skeleton animation="wave" height={50} />
+            <Skeleton animation="wave" height={50} />
+            <Skeleton animation="wave" height={50} />
+            <Skeleton animation="wave" height={50} />
+            <Skeleton animation="wave" height={50} />
+          </div>
+        ) : (
+          // Actual data
+          <MUIDataTable
+            title={"Agents"}
+            data={agents}
+            columns={columns}
+            options={options}
+          />
+        )}
+      </div>
     </div>
-
-    <div className={useStyles}>
-      <MUIDataTable
-        data={agents}
-        columns={columns}
-        options={options}
-      />
-    </div>
-    </div>
-   
   );
 }
 

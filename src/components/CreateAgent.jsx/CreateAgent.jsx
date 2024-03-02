@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Button, Dialog, DialogContent, DialogActions, TextField } from '@mui/material';
+import React, { useState,useEffect } from 'react';
+import { Button, Dialog, DialogContent, DialogActions, TextField,Skeleton } from '@mui/material';
 import axios from 'axios';
 
 
@@ -16,7 +16,7 @@ const CreateAgent = () => {
     location: ''
   });
   const [error, setError] = useState('');
-
+  const [loading, setLoading] = useState(true);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -24,6 +24,10 @@ const CreateAgent = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    setLoading(false); // Set loading to false after component mounts
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -49,8 +53,11 @@ const CreateAgent = () => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Create a New Agent</Button>
-      <Dialog open={open} onClose={handleClose}>
+ {loading ? (
+          <Skeleton variant="text" width={150}  animation="wave"/>
+      ) : (
+        <Button  onClick={handleOpen}>Create a New Agent</Button>
+      )}      <Dialog open={open} onClose={handleClose}>
         <DialogContent>
             <TextField
               fullWidth
