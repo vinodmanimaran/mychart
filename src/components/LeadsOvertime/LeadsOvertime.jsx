@@ -111,12 +111,12 @@ const LeadsOvertime = () => {
 
   return (
     <div>
-      <Grid container spacing={gridSpacing}>
-      <Grid item xs={12} sm={12}>
-          <Card style={{ marginTop: "30px", marginLeft: "20px" }} sx={{
+      <Grid container spacing={gridSpacing} sx={{
       margin: "0.5rem",
       boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.3), 0px 8px 16px rgba(0, 0, 0, 0.3)", 
     }}>
+      <Grid item xs={12} sm={12}>
+          <Card style={{ marginTop: "30px", marginLeft: "20px" }} >
             <CardHeader
               title={loading ? <Skeleton variant="text" /> : "Leads Over Time"}
             />
