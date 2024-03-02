@@ -38,7 +38,7 @@ const RevenuChartCard = ({ chartData }) => {
               breakpoint: 500,
               options: {
                 chart: {
-                  width: 350,
+                  width: 300,
                 },
                 legend: {
                   position: 'bottom',
