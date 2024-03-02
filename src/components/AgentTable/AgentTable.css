@@ -6,3 +6,13 @@
     display: flex;
     justify-content: flex-end;
 }
+
+
+
+@media (max-width: 576px) {
+    .cell {
+      overflow-wrap: break-word;
+      white-space: wrap;
+    }
+  }
+  
