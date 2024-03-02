@@ -111,12 +111,12 @@ const LeadsOvertime = () => {
 
   return (
     <div>
-      <Grid container spacing={gridSpacing} sx={{
+      <Grid container spacing={gridSpacing}>
+      <Grid item xs={12} sm={12}>
+          <Card style={{ marginTop: "30px", marginLeft: "20px" }} sx={{
       margin: "0.5rem",
       boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.3), 0px 8px 16px rgba(0, 0, 0, 0.3)", 
     }}>
-      <Grid item xs={12} sm={12}>
-          <Card style={{ marginTop: "30px", marginLeft: "20px" }} >
             <CardHeader
               title={loading ? <Skeleton variant="text" /> : "Leads Over Time"}
             />
@@ -152,7 +152,10 @@ const LeadsOvertime = () => {
 
         <Grid item xs={12} sx={{ display: { md: 'block', sm: 'none' } }}>
           {dashboardData ? (
-            <Card>
+            <Card sx={{
+              boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.3), 0px 8px 16px rgba(0, 0, 0, 0.3)", 
+
+            }}>
               <CardContent sx={{ p: '0 !important' }}>
                 <Grid container alignItems="center" spacing={0}>
                   {Object.entries(dashboardData.leadsCount).map(([service, count]) => (

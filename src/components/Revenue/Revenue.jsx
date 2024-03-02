@@ -79,7 +79,10 @@ const RevenuChartCard = ({ chartData }) => {
   }
 
   return (
-    <Card className='cards' >
+    <Card className='cards' sx={{
+      boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.3), 0px 8px 16px rgba(0, 0, 0, 0.3)", 
+
+    }}>
       <CardHeader
         title={
           <Typography component="div" className="card-header">
