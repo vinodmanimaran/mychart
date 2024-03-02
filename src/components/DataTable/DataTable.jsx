@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import MUIDataTable from "mui-datatables";
 import { Skeleton } from '@mui/material';
+import './DataTable.css'
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
@@ -68,27 +69,155 @@ const DataTable = () => {
   };
 
   const columns = [
-    { name: 'Date', label: 'Date' },
-    { name: 'id', label: 'ID' },
-    { name: 'agentId', label: 'Agent ID' },
-    { name: 'Service', label: 'Service' },
-    { name: 'name', label: 'Name' },
-    { name: 'mobile', label: 'Mobile' },
-    { name: 'alternate_number', label: 'Alternate Number' },
-    { name: 'place', label: 'Place' },
-    { name: 'district', label: 'District' },
-    { name: 'amount', label: 'Loan Amount' },
-    { name: 'vehicle', label: 'Vehicle' },
-    { name: 'Experience', label: 'Experience' },
-    { name: 'insurance_type', label: 'Insurance Type' },
-    { name: 'Country', label: 'Country' },
-    { name: 'OtherVehicle', label: 'OtherVehicle' },
-    { name: 'purchaseOrSale', label: 'Purchase/Sale' },
-    { name: 'agreeOrCommercial', label: 'Agree/Commercial' },
-    { name: 'Estimated_saving_amount', label: 'Estimated Saving amount' },
-    { name: 'Estimated_value', label: 'Estimated_value' },
-    { name: "loan_type", label: "Loan Type" }
-  ];
+    { 
+        name: 'Date', 
+        label: 'Date',
+        options: {
+            customBodyRender: (value) => (
+                <div className='data-cell'>
+                    {value}
+                </div>
+            )
+        }
+    },
+    { name: 'id', label: 'ID', options: {
+      customBodyRender: (value) => (
+        <div className='data-cell'>
+            {value}
+        </div>
+    )
+    } },
+    { name: 'agentId', label: 'Agent ID', options: {
+      customBodyRender: (value) => (
+        <div className='data-cell'>
+            {value}
+        </div>
+    )
+    } },
+    { name: 'Service', label: 'Service', options: {
+      customBodyRender: (value) => (
+        <div className='data-cell'>
+            {value}
+        </div>
+    )
+    } },
+    { name: 'name', label: 'Name', options: {
+      customBodyRender: (value) => (
+        <div className='data-cell'>
+            {value}
+        </div>
+    )
+    } },
+    { name: 'mobile', label: 'Mobile', options: {
+      customBodyRender: (value) => (
+        <div className='data-cell'>
+            {value}
+        </div>
+    )
+    } },
+    { name: 'alternate_number', label: 'Alternate Number', options: {
+      customBodyRender: (value) => (
+        <div className='data-cell'>
+            {value}
+        </div>
+    )
+    } },
+    { name: 'place', label: 'Place', options: {} },
+    { name: 'district', label: 'District', options: {
+      customBodyRender: (value) => (
+        <div className='data-cell'>
+            {value}
+        </div>
+    )
+    } },
+    { name: 'amount', label: 'Loan Amount', options: {
+      customBodyRender: (value) => (
+        <div className='data-cell'>
+            {value}
+        </div>
+    )
+    } },
+    { name: 'vehicle', label: 'Vehicle', options: {
+      customBodyRender: (value) => (
+        <div className='data-cell'>
+            {value}
+        </div>
+    )
+    } },
+    { name: 'Experience', label: 'Experience', options: {
+      customBodyRender: (value) => (
+        <div className='data-cell'>
+            {value}
+        </div>
+    )
+    } },
+    { name: 'insurance_type', label: 'Insurance Type', options: {
+      customBodyRender: (value) => (
+        <div className='data-cell'>
+            {value}
+        </div>
+    )
+    } },
+    { name: 'Country', label: 'Country', options: {
+      customBodyRender: (value) => (
+        <div className='data-cell'>
+            {value}
+        </div>
+    )
+    } },
+    { name: 'OtherVehicle', label: 'OtherVehicle', options: {
+      customBodyRender: (value) => (
+        <div className='data-cell'>
+            {value}
+        </div>
+    )
+    } },
+    { name: 'purchaseOrSale', label: 'Purchase/Sale', options: {
+      customBodyRender: (value) => (
+        <div className='data-cell'>
+            {value}
+        </div>
+    )
+    } },
+    { name: 'agreeOrCommercial', label: 'Agree/Commercial', options: {
+      customBodyRender: (value) => (
+        <div className='data-cell'>
+            {value}
+        </div>
+    )
+    } },
+    { name: 'Estimated_saving_amount', label: 'Estimated Saving amount', options: {
+      customBodyRender: (value) => (
+        <div className='data-cell'>
+            {value}
+        </div>
+    )
+    } },
+    { name: 'Estimated_value', label: 'Estimated_value', options: {
+      customBodyRender: (value) => (
+        <div className='data-cell'>
+            {value}
+        </div>
+
+      )
+    } },
+    { 
+        name: "loan_type", 
+        label: "Loan Type", 
+        options: {
+            customBodyRender: (value) => (
+                <div className='data-cell'>
+                    {value}
+                </div>
+            )
+        }
+    }
+];
+
+
+
+
+  
 
   const options = {
     filter: true,
