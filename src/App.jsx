@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Analytics from './pages/Analytics/Analytics';
 import Agents from './pages/Agents/Agents';
-import Layout from './components/Layout/Layout';
-
+import './App.css'
 import Login from './pages/Login/Login';
 import axios from 'axios';
 import Reset from './pages/Resetpassword/Reset';
