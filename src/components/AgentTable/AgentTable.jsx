@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Skeleton } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import axios from 'axios';
-import { makeStyles } from '@mui/styles';
 import './AgentTable.css'
 import CreateAgent from '../CreateAgent.jsx/CreateAgent';
 import { Download } from '@mui/icons-material';
@@ -222,7 +221,7 @@ const Agenttable = () => {
       <div className="btn">
         <CreateAgent/>
       </div>
-      <div className={`${classes.table}`}>
+      <div className=''>
         {skeletonLoading ? (
           <div>
             <Skeleton variant="text" height={50} />
