@@ -8,28 +8,28 @@ import CreateAgent from '../CreateAgent.jsx/CreateAgent';
 import { Download } from '@mui/icons-material';
 
 
-const useStyles = makeStyles({
-  container: {
-    backgroundColor: '#fff',
-    padding: '20px',
-    marginBottom: '20px',
-  },
-  table: {
-    '& .MuiPaper-root': {
-      border: 'none',
-    },
-    '& .MuiToolbar-root': {
-      borderBottom: '1px solid #e0e0e0',
-    },
-    '& .MuiTableHead-root': {
-      backgroundColor: '#f5f5f5',
-    },
-    '& .MuiTableCell-root': {
-      borderBottom: '1px solid #e0e0e0',
-      whiteSpace: 'nowrap',
-    },
-  },
-});
+// const useStyles = makeStyles({
+//   container: {
+//     backgroundColor: '#fff',
+//     padding: '20px',
+//     marginBottom: '20px',
+//   },
+//   table: {
+//     '& .MuiPaper-root': {
+//       border: 'none',
+//     },
+//     '& .MuiToolbar-root': {
+//       borderBottom: '1px solid #e0e0e0',
+//     },
+//     '& .MuiTableHead-root': {
+//       backgroundColor: '#f5f5f5',
+//     },
+//     '& .MuiTableCell-root': {
+//       borderBottom: '1px solid #e0e0e0',
+//       whiteSpace: 'nowrap',
+//     },
+//   },
+// });
 
 const API="https://backend-api-ebon-nu.vercel.app" || "http://localhost:4040"
 
@@ -218,7 +218,7 @@ const Agenttable = () => {
   };
 
   return (
-    <div className={`${classes.container}`}>
+    <div className=''>
       <div className="btn">
         <CreateAgent/>
       </div>
