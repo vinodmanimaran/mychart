@@ -1,11 +1,8 @@
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Box, Card, CardContent, Grid, Typography } from '@mui/material';
-
-// third-party
 import Chart from 'react-apexcharts';
 
-// ==============================|| SALES LINE CARD ||============================== //
 
 const SalesLineCard = ({ bgColor, chartData, footerData, icon, title, percentage }) => {
   const theme = useTheme();

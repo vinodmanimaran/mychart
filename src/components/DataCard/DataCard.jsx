@@ -2,10 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useTheme } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import LinearProgress from '@mui/material/LinearProgress';
 import MonetizationOnTwoToneIcon from '@mui/icons-material/MonetizationOnTwoTone';
 import AccountBalanceTwoToneIcon from '@mui/icons-material/AccountBalanceTwoTone';
 import CreditCardTwoToneIcon from '@mui/icons-material/CreditCardTwoTone';
@@ -38,7 +34,7 @@ const getIcon = (service) => {
   }
 };
 
-const API_URL = "https://backend-api-u4m5.onrender.com" || "http://localhost:4040";
+const API="https://backend-api-ebon-nu.vercel.app" || "http://localhost:4040"
 
 const DataCard = () => {
   const [dashboardData, setDashboardData] = useState(null);
@@ -48,7 +44,7 @@ const DataCard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${API_URL}/dashboard`);
+        const response = await axios.get(`${API}/dashboard`,{withCredentials:true});
         const revenueChartData = response.data; 
         console.log('Revenue Chart Data:', revenueChartData); 
         setDashboardData(revenueChartData); 
@@ -61,10 +57,18 @@ const DataCard = () => {
     fetchData();
   }, []);
 
+
+  useEffect(() => {
+    const skeletonTimer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+    return () => clearTimeout(skeletonTimer);
+  }, []);
+
   return (
     <div>
       {!dashboardData ? (
-        <Grid item xs={12} sx={{ margin: "10px" }}>
+        <Grid item xs={12} sx={{ margin: "10px"}}>
           <Grid container spacing={gridSpacing}>
             {[...Array(4)].map((_, index) => (
               <Grid item lg={3} sm={6} xs={12} key={index}>

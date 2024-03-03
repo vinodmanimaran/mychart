@@ -11,7 +11,7 @@ import Layout from '../../components/Layout/Layout'
 import axios from 'axios';
 import DataTable from '../../components/DataTable/DataTable';
 
-const API_URL = "https://backend-api-u4m5.onrender.com"||"http://localhost:4040";
+const API="https://backend-api-ebon-nu.vercel.app" || "http://localhost:4040"
 
 
 const Analytics = () => {
@@ -21,10 +21,10 @@ const Analytics = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${API_URL}/dashboard`);
-        const revenueChartData = response.data; // Assuming the response contains the revenue chart data
-        console.log('Revenue Chart Data:', revenueChartData); // Log the data to verify its structure
-        setDashboardData(revenueChartData); // Set the fetched data to state
+        const response = await axios.get(`${API}/dashboard`, { withCredentials: true });
+        const revenueChartData = response.data;
+        console.log('Revenue Chart Data:', revenueChartData);
+        setDashboardData(revenueChartData); 
       } catch (error) {
         console.error('Error fetching revenue chart data:', error);
       }
@@ -66,7 +66,6 @@ const Analytics = () => {
       </Grid>
 
 
-      {/* Footer component */}
       <DataTable />
     </div>
   );

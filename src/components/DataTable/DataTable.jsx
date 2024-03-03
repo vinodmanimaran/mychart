@@ -24,20 +24,22 @@ const useStyles = makeStyles({
   },
 });
 
+const API="https://backend-api-ebon-nu.vercel.app" || "http://localhost:4040"
+
+
 const DataTable = () => {
-  const classes = useStyles(); // Correct usage of useStyles
+  const classes = useStyles(); 
 
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true); // State to control loading
-  const API_URL = "https://backend-api-u4m5.onrender.com" || "http://localhost:4040";
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${API_URL}/dashboard`);
+        const response = await axios.get(`${API}/dashboard`,{withCredentials:true});
         const revenueChartData = response.data?.data || {};
         setData(generateRows(revenueChartData));
-        setLoading(false); // Set loading to false when data is loaded
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -217,7 +219,12 @@ const DataTable = () => {
 
 
 
-  
+useEffect(() => {
+  const skeletonTimer = setTimeout(() => {
+    setLoading(false);
+  }, 1000);
+  return () => clearTimeout(skeletonTimer);
+}, []);
 
   const options = {
     filter: true,

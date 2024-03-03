@@ -7,12 +7,23 @@
     justify-content: flex-end;
 }
 
-
+.qr-details{
+  display: flex;
+  justify-content: space-between;
+}
+.download-icon{
+  margin-top: 30px;
+  cursor: pointer;
+}
 
 @media (max-width: 576px) {
     .cell {
       overflow-wrap: break-word;
       white-space: wrap;
+    }
+
+    .download-icon{
+      transform: translateX(-50px);
     }
   }
   

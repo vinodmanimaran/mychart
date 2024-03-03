@@ -1,0 +1,43 @@
+.logincard{
+    display: flex;
+    flex-direction: column; 
+    width: 30rem;
+    height:auto;
+}
+
+.forgot-block{
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+.forgot-text{
+    margin-top: -5px;
+}
+
+
+.contentcard{
+    margin: 1rem;
+}
+
+
+
+
+.login-input{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+
+
+@media (max-width:576px){
+    .logincard{
+        transform: translate(-1%);
+        overflow: hidden;
+    }
+
+   
+}

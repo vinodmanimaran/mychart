@@ -1,13 +1,12 @@
 .appbar{
     margin-top:-7.7px;
     margin-left: -8px;
-    width: 101%;
 }
 
 
 @media screen and (max-width: 576px){
     .appbar{
-        width: 110%;
-        overflow: hidden;
+    overflow: hidden;
+        width:28rem;
     }
 }  

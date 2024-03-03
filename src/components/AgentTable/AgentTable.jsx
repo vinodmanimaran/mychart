@@ -5,11 +5,11 @@ import axios from 'axios';
 import { makeStyles } from '@mui/styles';
 import './AgentTable.css'
 import CreateAgent from '../CreateAgent.jsx/CreateAgent';
+import { Download } from '@mui/icons-material';
+
 
 const useStyles = makeStyles({
   container: {
-    borderRadius: '5px',
-    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
     backgroundColor: '#fff',
     padding: '20px',
     marginBottom: '20px',
@@ -31,21 +31,28 @@ const useStyles = makeStyles({
   },
 });
 
-const API_URL = "https://backend-api-u4m5.onrender.com" || "http://localhost:4040";
+const API="https://backend-api-ebon-nu.vercel.app" || "http://localhost:4040"
 
 const Agenttable = () => {
   const classes = useStyles();
-
   const [agents, setAgents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [skeletonLoading, setSkeletonLoading] = useState(true);
+  const [agentNames, setAgentNames] = useState([]);
+
 
   useEffect(() => {
     const fetchAgents = async () => {
       try {
-        const response = await axios.get(`${API_URL}/agent/getallagent`);
+        const response = await axios.get(`${API}/agent/getallagent`,{withCredentials:true});
+        const names = response.data.agents.map(agent => agent.name);
+        setAgentNames(names);
+
+        console.log(names)
+
         setAgents(response.data.agents);
+       
         setLoading(false);
       } catch (error) {
         console.error('Error fetching agents:', error);
@@ -56,6 +63,18 @@ const Agenttable = () => {
 
     fetchAgents();
   }, []);
+
+
+  const downloadQRCode = (url, agentName,agentID) => {
+    const fileName = `${agentName}-${agentID}.png`;
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+  
 
   useEffect(() => {
     const skeletonTimer = setTimeout(() => {
@@ -124,13 +143,59 @@ const Agenttable = () => {
       name: "qrCode",
       label: "QR Code",
       options: {
+        customBodyRender: (value, tableMeta) => (
+          <div className='cell qr-details'>
+            <img src={value} alt={`QR Code`} style={{ width: "80px" }} />
+            <div className="download-icon" onClick={() => downloadQRCode(value,  agents[tableMeta.rowIndex].agentId,agents[tableMeta.rowIndex].name)}>
+              <Download />
+            </div>
+          </div>
+        )
+    
+      } 
+    },
+    {
+      name: "Bank_Name",
+      label: "Bank Name",
+      options: {
         customBodyRender: (value) => (
           <div className='cell'>
-            <img src={value} alt={`QR Code`} style={{ width: "80px" }} />
+          {value}
+        </div>
+        )
+      }
+    }, {
+      name: "Aadhar_Number",
+      label: "Aadhar",
+      options: {
+        customBodyRender: (value) => (
+          <div className='cell'>
+          {value}
+        </div>
+        )
+      }
+    }, {
+      name: "Account_Number",
+      label: "Account Number",
+      options: {
+        customBodyRender: (value) => (
+          <div className='cell'>
+            {value}
           </div>
         )
       }
-    }
+    }, {
+      name: "IFSC_Code",
+      label: "IFSC Code",
+      options: {
+        customBodyRender: (value) => (
+          <div className='cell'>
+          {value}
+        </div>
+        )
+      }
+    },
+
   ];
 
   
@@ -168,11 +233,13 @@ const Agenttable = () => {
             <Skeleton animation="wave" height={50} />
           </div>
         ) : (
+          
           <MUIDataTable
             title={"Agents"}
             data={agents}
             columns={columns}
             options={options}
+            
           />
         )}
       </div>

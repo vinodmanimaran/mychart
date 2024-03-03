@@ -3,28 +3,36 @@ import axios from 'axios';
 import { Grid, Card, CardHeader, Divider, CardContent, Typography, LinearProgress, Skeleton } from '@mui/material';
 
 
-const API_URL = "https://backend-api-u4m5.onrender.com" || "http://localhost:4040";
+const API="https://backend-api-ebon-nu.vercel.app" || "http://localhost:4040"
 
 
 const ProgressData = () => {
   const [dashboardData, setDashboardData] = useState(null);
-  const [loading, setLoading] = useState(true); // State to manage loading status
-  const gridSpacing = 2; // Define grid spacing as per your requirement
+  const [loading, setLoading] = useState(true); 
+  const gridSpacing = 2; 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${API_URL}/dashboard`);
+        const response = await axios.get(`${API}/dashboard`, { withCredentials: true });
         const revenueChartData = response.data; 
         console.log('Revenue Chart Data:', revenueChartData); 
         setDashboardData(revenueChartData); 
-        setLoading(false); // Set loading to false once data is fetched
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching revenue chart data:', error);
       }
     };
   
     fetchData();
+  }, []);
+
+
+  useEffect(() => {
+    const skeletonTimer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+    return () => clearTimeout(skeletonTimer);
   }, []);
 
   return (
@@ -37,7 +45,7 @@ const ProgressData = () => {
           <CardHeader
             title={
               loading?(
-                <Skeleton variant="text" />
+                <Skeleton variant="text"  animation="wave" />
 
               ):(
                 <Typography component="div" className="card-header">
@@ -50,10 +58,10 @@ const ProgressData = () => {
           <Divider />
           <CardContent>
             <Grid container spacing={gridSpacing}>
-              {loading ? ( // Skeleton loading effect for the card content
+              {loading ? ( 
                 [...Array(4)].map((_, index) => (
                   <Grid item xs={12} key={index}>
-                    <Skeleton variant="text" />
+                    <Skeleton variant="text"  animation="wave" />
                   </Grid>
                 ))
               ) : (

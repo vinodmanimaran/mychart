@@ -7,7 +7,10 @@ import './Revenue.css';
 const RevenuChartCard = ({ chartData }) => {
   const theme = useTheme();
   const [barChartData, setBarChartData] = useState(null);
-  const [loading, setLoading] = useState(true); // State to control loading
+  const [loading, setLoading] = useState(true); 
+
+
+  
 
   useEffect(() => {
     if (chartData && chartData.leadsPercentage) {
@@ -49,20 +52,21 @@ const RevenuChartCard = ({ chartData }) => {
         },
       };
       setBarChartData(newBarChartData);
-      setLoading(false); // Set loading to false when data is loaded
+      setLoading(false); 
     }
   }, [chartData]);
 
   const matchDownMd = useMediaQuery(theme.breakpoints.down('md'));
   const matchDownXs = useMediaQuery(theme.breakpoints.down('sm'));
 
-  if (loading) { // Show skeleton while loading
+  if (loading) {
     return (
+
       <Card className='cards' >
         <CardHeader
           title={
             <Typography component="div" className="card-header">
-              <Skeleton animation="wave" width={200} />
+              <Skeleton animation="wave" width={200}  />
             </Typography>
           }
         />

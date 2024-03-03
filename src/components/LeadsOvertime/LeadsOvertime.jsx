@@ -4,10 +4,9 @@ import { Grid, Card, CardHeader, CardContent, Typography, Divider, Skeleton } fr
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 import styled from '@emotion/styled';
 import { useTheme } from '@emotion/react';
-
 import SalesLineCard from './SalesLineCard';
 
-const API_URL = "https://backend-api-u4m5.onrender.com" || "http://localhost:4040";
+const API="https://backend-api-ebon-nu.vercel.app" || "http://localhost:4040"
 
 const FlatCardBlock = styled(Grid)(({ theme }) => ({
   padding: '25px 25px',
@@ -21,24 +20,6 @@ const FlatCardBlock = styled(Grid)(({ theme }) => ({
   }
 }));
 
-const SkeletonLoading = () => {
-  return (
-    <div style={{ margin: '20px' }}>
-      <Card>
-        <CardContent>
-          <Grid container spacing={2}>
-            {[1, 2, 3].map((item) => (
-              <Grid item xs={12} sm={4} key={item}>
-                <div style={{ padding: '20px', borderRadius: '5px', backgroundColor: '#f0f0f0' }} />
-              </Grid>
-            ))}
-          </Grid>
-        </CardContent>
-      </Card>
-    </div>
-  );
-};
-
 const LeadsOvertime = () => {
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -47,7 +28,7 @@ const LeadsOvertime = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${API_URL}/dashboard`);
+        const response = await axios.get(`${API}/dashboard`,{withCredentials:true});
         setDashboardData(response.data);
         setLoading(false);
       } catch (error) {
@@ -107,6 +88,10 @@ const LeadsOvertime = () => {
     return averageLeadsPerDay.toFixed(2);
   }
 
+
+
+ 
+
   const gridSpacing = 2;
 
   return (
@@ -118,14 +103,14 @@ const LeadsOvertime = () => {
       boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.3), 0px 8px 16px rgba(0, 0, 0, 0.3)", 
     }}>
             <CardHeader
-              title={loading ? <Skeleton variant="text" /> : "Leads Over Time"}
+              title={loading ? <Skeleton variant="text" animation="wave" /> : "Leads Over Time"}
             />
             <Divider />
             <CardContent>
               <Grid container spacing={gridSpacing}>
                 <Grid item xs={12}>
                   {loading ? (
-                    <Skeleton variant="rect" height={200} />
+                    <Skeleton variant="rect" height={200}  animation="wave" />
                   ) : (
                     <SalesLineCard
                       chartData={generateChartData(dashboardData)}
@@ -178,7 +163,7 @@ const LeadsOvertime = () => {
               </CardContent>
             </Card>
           ) : (
-            <Skeleton variant='square' />
+            <Skeleton variant='square' animation="wave" />
           )}
         </Grid>
       </Grid>
