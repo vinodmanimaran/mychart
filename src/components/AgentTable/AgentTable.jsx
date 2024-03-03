@@ -10,7 +10,6 @@ import { Download } from '@mui/icons-material';
 const API="https://backend-api-ebon-nu.vercel.app" || "http://localhost:4040"
 
 const Agenttable = () => {
-  const classes = useStyles();
   const [agents, setAgents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
