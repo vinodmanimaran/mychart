@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import './Login.css';
 
-const API_URL = import.meta.env.VITE_API || "http://localhost:4040";
+const API = import.meta.env.VITE_API || "http://localhost:4040";
 
 const Login = ({ handleLogin }) => {
     const navigate=useNavigate()

@@ -34,7 +34,7 @@ const getIcon = (service) => {
   }
 };
 
-const API_URL = import.meta.env.VITE_API || "http://localhost:4040";
+const API = import.meta.env.VITE_API || "http://localhost:4040";
 
 const DataCard = () => {
   const [dashboardData, setDashboardData] = useState(null);

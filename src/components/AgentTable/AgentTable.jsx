@@ -7,7 +7,7 @@ import CreateAgent from '../CreateAgent.jsx/CreateAgent';
 import { Download } from '@mui/icons-material';
 
 
-const API="https://backend-api-ebon-nu.vercel.app" || "http://localhost:4040"
+const API = import.meta.env.VITE_API || "http://localhost:4040";
 
 const Agenttable = () => {
   const [agents, setAgents] = useState([]);

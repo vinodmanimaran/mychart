@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Grid, Card, CardHeader, Divider, CardContent, Typography, LinearProgress, Skeleton } from '@mui/material';
 
 
-const API_URL = import.meta.env.VITE_API || "http://localhost:4040";
+const API = import.meta.env.VITE_API || "http://localhost:4040";
 
 
 const ProgressData = () => {

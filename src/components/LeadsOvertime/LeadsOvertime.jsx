@@ -7,7 +7,7 @@ import styled from '@emotion/styled';
 import { useTheme } from '@emotion/react';
 import SalesLineCard from './SalesLineCard';
 
-const API_URL = import.meta.env.VITE_API || "http://localhost:4040";
+const API = import.meta.env.VITE_API || "http://localhost:4040";
 
 const FlatCardBlock = styled(Grid)(({ theme }) => ({
   padding: '25px 25px',

@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-const API_URL = import.meta.env.VITE_API || "http://localhost:4040";
+const API = import.meta.env.VITE_API || "http://localhost:4040";
 
 
 const DataTable = () => {

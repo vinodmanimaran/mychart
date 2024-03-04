@@ -7,7 +7,7 @@ import Login from './pages/Login/Login';
 import axios from 'axios';
 import Reset from './pages/Resetpassword/Reset';
 
-const API_URL = import.meta.env.VITE_API || "http://localhost:4040";
+const API = import.meta.env.VITE_API || "http://localhost:4040";
 
 
 const App = () => {

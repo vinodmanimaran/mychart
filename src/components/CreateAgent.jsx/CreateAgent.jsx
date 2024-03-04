@@ -3,7 +3,7 @@ import { Button, Dialog, DialogContent, DialogActions, TextField, Skeleton } fro
 import axios from 'axios';
 
 
-const API_URL = import.meta.env.VITE_API || "http://localhost:4040";
+const API = import.meta.env.VITE_API || "http://localhost:4040";
 
 
 
