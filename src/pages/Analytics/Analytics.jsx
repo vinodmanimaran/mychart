@@ -72,7 +72,7 @@ const Analytics = () => {
               <CardContent>
 
               <Skeleton variant='rect' height={450} animation="wave"
-style={{width:"50%"}}
+style={{width:"100%"}}
 /> 
 
               </CardContent>
