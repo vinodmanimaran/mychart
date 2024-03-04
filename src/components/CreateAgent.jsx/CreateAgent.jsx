@@ -90,6 +90,14 @@ const CreateAgent = () => {
             onChange={handleChange}
             sx={{ marginBottom: "10px" }}
           />
+           <TextField
+            fullWidth
+            label="Aadhar Number"
+            name="Aadhar_Number"
+            value={formData.Aadhar_Number}
+            onChange={handleChange}
+            sx={{ marginBottom: "10px" }}
+          />
           <TextField
             fullWidth
             label="PAN Number"
@@ -106,14 +114,7 @@ const CreateAgent = () => {
             onChange={handleChange}
             sx={{ marginBottom: "10px" }}
           />
-          <TextField
-            fullWidth
-            label="Aadhar Number"
-            name="Aadhar_Number"
-            value={formData.Aadhar_Number}
-            onChange={handleChange}
-            sx={{ marginBottom: "10px" }}
-          />
+         
           <TextField
             fullWidth
             label="Account Number"
