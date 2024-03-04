@@ -23,7 +23,7 @@ const getIcon = (service) => {
       return CreditCardTwoToneIcon;
     case 'RealEstate':
       return HomeTwoToneIcon;
-    case 'Savings':
+    case 'Microsavings & Investments':
       return ThumbUpAltTwoToneIcon;
     case 'Insurance':
       return AssignmentTurnedInTwoToneIcon;
