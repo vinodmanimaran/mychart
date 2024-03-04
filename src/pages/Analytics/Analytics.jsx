@@ -71,7 +71,9 @@ const Analytics = () => {
               <Divider/>
               <CardContent>
 
-              <Skeleton variant='rect' width={450} height={450} animation="wave"/> 
+              <Skeleton variant='rect' height={450} animation="wave"
+style={{width:"50%"}}
+/> 
 
               </CardContent>
             </Card>
