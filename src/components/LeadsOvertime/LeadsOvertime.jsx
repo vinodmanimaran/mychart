@@ -10,22 +10,27 @@ const API="https://backend-api-ebon-nu.vercel.app" || "http://localhost:4040"
 
 const FlatCardBlock = styled(Grid)(({ theme }) => ({
   padding: '25px 25px',
-  borderLeft: `1px solid ${theme?.palette?.background?.default}`,
-  [theme?.breakpoints?.down('sm')]: {
+  borderLeft: theme && theme.palette && theme.palette.background && theme.palette.background.default ?
+    `1px solid ${theme.palette.background.default}` : 'none',
+  [theme && theme.breakpoints && theme.breakpoints.down('sm')]: {
     borderLeft: 'none',
-    borderBottom: `1px solid ${theme?.palette?.background?.default}`
+    borderBottom: theme && theme.palette && theme.palette.background && theme.palette.background.default ?
+      `1px solid ${theme.palette.background.default}` : 'none',
   },
-  [theme?.breakpoints?.down('md')]: {
-    borderBottom: `1px solid ${theme?.palette?.background?.default}`
+  [theme && theme.breakpoints && theme.breakpoints.down('md')]: {
+    borderBottom: theme && theme.palette && theme.palette.background && theme.palette.background.default ?
+      `1px solid ${theme.palette.background.default}` : 'none',
   }
 }));
+
 
 const LeadsOvertime = () => {
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
   const theme = useTheme();
 
-  useEffect(() => {
+
+ useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${API}/dashboard`,{withCredentials:true});

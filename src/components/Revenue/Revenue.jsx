@@ -8,7 +8,11 @@ const RevenuChartCard = ({ chartData }) => {
   const theme = useTheme();
   const [barChartData, setBarChartData] = useState(null);
   const [loading, setLoading] = useState(true); 
-
+  const savingstitle = "Microsavings & Investments";
+  const RealEstatetitle = "Real Estate";
+  const CreditCardtitle = "Credit Card";
+  const vehicleInsurancestitle="Vehicle Insurance"
+  
 
   
 
@@ -17,13 +21,13 @@ const RevenuChartCard = ({ chartData }) => {
       const seriesData = Object.values(chartData.leadsPercentage);
       const labels = Object.keys(chartData.leadsPercentage);
       const serviceColors = {
-        jobs: '#FF5733',
-        loans: '#33FFC6',
-        creditCards: '#3399FF',
-        realEstate: '#FF33F9',
-        savingsInvestments: '#F9FF33',
-        otherInsurances: '#33FFAA',
-        vehicleInsurances: '#338AFF',
+        Jobs: '#FF5733',
+        Loans: '#33FFC6',
+        [savingstitle]: '#3399FF',
+        [RealEstatetitle]: '#FF33F9',
+        [savingstitle]: '#F9FF33',
+        [CreditCardtitle]: '#33FFAA',
+        [vehicleInsurancestitle]: '#338AFF',
       };
 
       const newBarChartData = {

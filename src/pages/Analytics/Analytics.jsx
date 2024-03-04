@@ -54,7 +54,7 @@ const Analytics = () => {
         <LeadsOvertime />
       </Grid>
       <Grid item xs={12} sm={4}>
-        <RevenuChartCard chartData={dashboardData} />
+      {dashboardData && <RevenuChartCard chartData={dashboardData} />}
       </Grid>
       <Grid item xs={12} sm={4}>
         <ProgressData />
