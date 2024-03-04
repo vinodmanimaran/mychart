@@ -1,134 +1,87 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import { Grid, Card, CardHeader, CardContent, Typography, Divider, Skeleton } from '@mui/material';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 import styled from '@emotion/styled';
 import { useTheme } from '@emotion/react';
 import SalesLineCard from './SalesLineCard';
 
-const API="https://backend-api-ebon-nu.vercel.app" || "http://localhost:4040"
+const API = "https://backend-api-ebon-nu.vercel.app" || "http://localhost:4040";
 
 const FlatCardBlock = styled(Grid)(({ theme }) => ({
   padding: '25px 25px',
-  borderLeft: theme && theme.palette && theme.palette.background && theme.palette.background.default ?
-    `1px solid ${theme.palette.background.default}` : 'none',
-  [theme && theme.breakpoints && theme.breakpoints.down('sm')]: {
+  borderLeft: `1px solid ${theme?.palette?.background?.default}`,
+  [theme?.breakpoints?.down('sm')]: {
     borderLeft: 'none',
-    borderBottom: theme && theme.palette && theme.palette.background && theme.palette.background.default ?
-      `1px solid ${theme.palette.background.default}` : 'none',
+    borderBottom: `1px solid ${theme?.palette?.background?.default}`
   },
-  [theme && theme.breakpoints && theme.breakpoints.down('md')]: {
-    borderBottom: theme && theme.palette && theme.palette.background && theme.palette.background.default ?
-      `1px solid ${theme.palette.background.default}` : 'none',
+  [theme?.breakpoints?.down('md')]: {
+    borderBottom: `1px solid ${theme?.palette?.background?.default}`
   }
 }));
-
 
 const LeadsOvertime = () => {
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
   const theme = useTheme();
 
+  useEffect(() => {
+    let isMounted = true;
 
- useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${API}/dashboard`,{withCredentials:true});
-        setDashboardData(response.data);
-        setLoading(false);
+        const response = await axios.get(`${API}/dashboard`, { withCredentials: true });
+        if (isMounted) {
+          setDashboardData(response.data);
+          setLoading(false);
+        }
       } catch (error) {
         console.error('Error fetching revenue chart data:', error);
+        setLoading(false);
       }
     };
 
     fetchData();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
-  function generateChartData(data) {
-    const leadsData = data?.jobs;
-    if (!leadsData || leadsData.length === 0) return null;
-
-    const leadsPerDay = {};
-
-    leadsData.forEach(lead => {
-      const createdAt = new Date(lead.createdAt).toLocaleDateString();
-      leadsPerDay[createdAt] = (leadsPerDay[createdAt] || 0) + 1;
-    });
-
-    const chartData = {
-      labels: Object.keys(leadsPerDay),
-      datasets: [
-        {
-          label: 'Leads Generation',
-          data: Object.values(leadsPerDay)
-        }
-      ]
-    };
-
-    return chartData;
-  }
-
-  function calculateAverageLeadsPerDay(data) {
-    if (!data || !data.jobs || !data.leadsCount || !data.leadsCount.jobs) {
-      console.log("Invalid data provided");
-      return 0;
-    }
-
-    const jobs = data.jobs;
-    const creationTimestamps = jobs.map(job => new Date(job.createdAt).getTime());
-
-    const startDate = new Date(Math.min(...creationTimestamps));
-    const endDate = new Date(Math.max(...creationTimestamps));
-
-    const durationInDays = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)) || 1;
-
-    const totalLeads = data.leadsCount.jobs || 0;
-
-    console.log("Total leads:", totalLeads);
-    console.log("Duration in days:", durationInDays);
-    const averageLeadsPerDay = totalLeads / durationInDays;
-
-    console.log("Average leads per day:", averageLeadsPerDay.toFixed(2));
-
-    return averageLeadsPerDay.toFixed(2);
-  }
 
 
-
- 
-
-  const gridSpacing = 2;
 
   return (
     <div>
-      <Grid container spacing={gridSpacing}>
-      <Grid item xs={12} sm={12}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={12}>
           <Card style={{ marginTop: "30px", marginLeft: "20px" }} sx={{
-      margin: "0.5rem",
-      boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.3), 0px 8px 16px rgba(0, 0, 0, 0.3)", 
-    }}>
+            margin: "0.5rem",
+            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.3), 0px 8px 16px rgba(0, 0, 0, 0.3)",
+          }}>
             <CardHeader
               title={loading ? <Skeleton variant="text" animation="wave" /> : "Leads Over Time"}
             />
             <Divider />
             <CardContent>
-              <Grid container spacing={gridSpacing}>
+              <Grid container spacing={2}>
                 <Grid item xs={12}>
                   {loading ? (
-                    <Skeleton variant="rect" height={200}  animation="wave" />
+                    <Skeleton variant="rect" height={200} animation="wave" />
                   ) : (
                     <SalesLineCard
-                      chartData={generateChartData(dashboardData)}
+                      chartData={dashboardData?.totalDataCountPercentage}
                       title="Leads Generation Over Time"
-                      percentage={`${dashboardData.leadsPercentage.jobs}%`}
+                      percentage={`${dashboardData && dashboardData?.totalDataCountPercentage}%`}
                       icon={<TrendingDownIcon />}
                       footerData={[
                         {
-                          value: `${dashboardData.leadsCount.jobs}`,
+                          value: `${dashboardData?.totalDataCount}`,
                           label: 'Total Leads'
                         },
                         {
-                          value: `${calculateAverageLeadsPerDay(dashboardData)}`,
+                          value: `${dashboardData?.liveDuration}`,
                           label: 'Avg. Leads/Day'
                         }
                       ]}
@@ -143,12 +96,11 @@ const LeadsOvertime = () => {
         <Grid item xs={12} sx={{ display: { md: 'block', sm: 'none' } }}>
           {dashboardData ? (
             <Card sx={{
-              boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.3), 0px 8px 16px rgba(0, 0, 0, 0.3)", 
-
+              boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.3), 0px 8px 16px rgba(0, 0, 0, 0.3)",
             }}>
               <CardContent sx={{ p: '0 !important' }}>
                 <Grid container alignItems="center" spacing={0}>
-                  {Object.entries(dashboardData.leadsCount).map(([service, count]) => (
+                  {Object.entries(dashboardData?.leadsCount || {}).map(([service, count]) => (
                     <FlatCardBlock key={service}>
                       <Grid container alignItems="center" spacing={1}>
                         <Grid item>
@@ -168,12 +120,20 @@ const LeadsOvertime = () => {
               </CardContent>
             </Card>
           ) : (
-            <Skeleton variant='square' animation="wave" />
+            <Skeleton variant='rect' animation="wave" />
           )}
         </Grid>
       </Grid>
     </div>
   );
+};
+
+LeadsOvertime.propTypes = {
+  data: PropTypes.shape({
+    totalDataCount: PropTypes.number.isRequired,
+    liveDuration: PropTypes.number.isRequired,
+    totalDataCountPercentage: PropTypes.number.isRequired
+  }),
 };
 
 export default LeadsOvertime;

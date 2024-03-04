@@ -13,24 +13,30 @@ import DataTable from '../../components/DataTable/DataTable';
 
 const API="https://backend-api-ebon-nu.vercel.app" || "http://localhost:4040"
 
-
 const Analytics = () => {
   const [dashboardData, setDashboardData] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
+    let isMounted = true; // Flag to track component mount status
     const fetchData = async () => {
       try {
         const response = await axios.get(`${API}/dashboard`, { withCredentials: true });
         const revenueChartData = response.data;
-        console.log('Revenue Chart Data:', revenueChartData);
-        setDashboardData(revenueChartData); 
+        if (isMounted) {
+          setDashboardData(revenueChartData);
+        }
       } catch (error) {
         console.error('Error fetching revenue chart data:', error);
       }
     };
 
     fetchData();
+
+    // Cleanup function to set isMounted to false when component unmounts
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const toggleSidebar = () => {
@@ -39,32 +45,26 @@ const Analytics = () => {
 
   return (
     <div>
-<Layout/>
-<div className="row m-1 p-1">
-  <div className="col">
-  <DataCard />
+      <Layout />
+      <div className="row m-1 p-1">
+        <div className="col">
+          <DataCard />
+        </div>
+      </div>
 
-    
-  </div>
- 
-</div>
-
-<Grid container spacing={3}>
-      <Grid item xs={12} sm={4}>
-        <LeadsOvertime />
-      </Grid>
-      <Grid item xs={12} sm={4}>
-      {dashboardData && <RevenuChartCard chartData={dashboardData} />}
-      </Grid>
-      <Grid item xs={12} sm={4}>
-        <ProgressData />
-      </Grid>
-    </Grid>
-
-
-      <Grid item xs={12} sm={6}>
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={4}>
+          <LeadsOvertime />
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          {dashboardData && <RevenuChartCard chartData={dashboardData} />}
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <ProgressData />
+        </Grid>
       </Grid>
 
+      <Grid item xs={12} sm={6}></Grid>
 
       <DataTable />
     </div>

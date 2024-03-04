@@ -12,19 +12,27 @@ const ProgressData = () => {
   const gridSpacing = 2; 
 
   useEffect(() => {
+    let isMounted = true;
     const fetchData = async () => {
       try {
         const response = await axios.get(`${API}/dashboard`, { withCredentials: true });
         const revenueChartData = response.data; 
         console.log('Revenue Chart Data:', revenueChartData); 
-        setDashboardData(revenueChartData); 
-        setLoading(false);
+        if(isMounted){
+          setDashboardData(revenueChartData); 
+          setLoading(false);
+        }
+       
       } catch (error) {
         console.error('Error fetching revenue chart data:', error);
       }
     };
   
     fetchData();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
 

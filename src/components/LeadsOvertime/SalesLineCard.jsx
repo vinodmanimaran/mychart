@@ -3,7 +3,6 @@ import { useTheme } from '@mui/material/styles';
 import { Box, Card, CardContent, Grid, Typography } from '@mui/material';
 import Chart from 'react-apexcharts';
 
-
 const SalesLineCard = ({ bgColor, chartData, footerData, icon, title, percentage }) => {
   const theme = useTheme();
   let footerHtml;
@@ -56,7 +55,7 @@ const SalesLineCard = ({ bgColor, chartData, footerData, icon, title, percentage
                 </Grid>
               </Grid>
             </Grid>
-            {chartData && (
+            {chartData && chartData.series && (
               <Grid item>
                 <Chart {...chartData} />
               </Grid>
@@ -72,7 +71,5 @@ const SalesLineCard = ({ bgColor, chartData, footerData, icon, title, percentage
     </Card>
   );
 };
-
-
 
 export default SalesLineCard;

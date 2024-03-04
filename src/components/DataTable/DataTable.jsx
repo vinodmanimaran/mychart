@@ -34,17 +34,28 @@ const DataTable = () => {
   const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
+    let isMounted = true; // Flag to track component mount status
+
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${API}/dashboard`,{withCredentials:true});
+        const response = await axios.get(`${API}/dashboard`, { withCredentials: true });
         const revenueChartData = response.data?.data || {};
-        setData(generateRows(revenueChartData));
-        setLoading(false);
+
+        if (isMounted) {
+          setData(generateRows(revenueChartData));
+          setLoading(false);
+        }
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
+
     fetchData();
+
+    // Cleanup function to set isMounted to false when component unmounts
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const generateRows = (data) => {
