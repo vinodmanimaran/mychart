@@ -76,10 +76,9 @@ const Reset = () => {
           </CardActions>
 
           <div className="login-content">
-            <h5>If you Already have password? <Link  to="/login"> Login</Link></h5>
+            <h5>If you Already have password?<Link  to="/login"> Login</Link></h5>
           </div>
         </Card>
-       
       </div>
     );
 };

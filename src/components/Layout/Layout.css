@@ -3,6 +3,14 @@
     margin-left: -8px;
     width: 101%;
 }
+.logo-nav{
+    text-decoration: none;
+    color: white;
+}
+
+.logout-button{
+    display: flex;
+}
 
 
 

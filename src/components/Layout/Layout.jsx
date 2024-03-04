@@ -3,7 +3,7 @@ import { AppBar, Toolbar, IconButton, Typography, Drawer, List, ListItem, ListIt
 import MenuIcon from '@mui/icons-material/Menu';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link, Link as RouterLink } from 'react-router-dom';
 import './Layout.css'
 const drawerWidth = 250;
 
@@ -30,10 +30,16 @@ const Layout = ({ children }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h6" noWrap >
+            <Link to="/" className='logo-nav'>
             PEEJIYEM
+            </Link>
           </Typography>
+
+         
         </Toolbar>
+        
+         
       </AppBar>
       <Drawer
         variant="persistent"
