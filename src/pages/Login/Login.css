@@ -1,43 +1,82 @@
-.logincard{
+.login-container {
     display: flex;
-    flex-direction: column; 
-    width: 30rem;
-    height:auto;
+    justify-content: center;
+    align-items: center;
+    background: url('../../assets/login.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    padding: 1rem;
+    background-repeat: no-repeat;
 }
 
-.forgot-block{
+  
+  .login-card {
+    padding: 40px;
+    width: 400px;
+    border-radius: 20px !important  ;
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.1); 
+    background-color: #fff; 
+    animation: fadeInUp 0.6s ease; 
+  }
+  
+  .login-logo {
+    margin-bottom: 10px;
+    font-size: 36px;
+    font-weight: 700;
+    color: #333;
+    margin-top: -20px;
+  font-family: "Oswald", sans-serif;
+  
+    text-align: center;
+  }
+  
+  .login-input {
+    margin-bottom: 30px;
+  }
+  
+  .login-btn {
+    margin-top: 30px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 30px;
+    background-color: #4caf50;
+    color: #fff; 
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-btn:hover {
+    background-color: #388e3c; 
+  }
+  
+  .login-button:disabled {
+    background-color: #ccc; 
+    cursor: not-allowed;
+  }
+
+
+  .forgot-block{
     display: flex;
     justify-content: flex-end;
-}
-
-
-.forgot-text{
-    margin-top: -5px;
-}
-
-
-.contentcard{
-    margin: 1rem;
-}
-
-
-
-
-.login-input{
-    display: flex;
-    flex-direction: column;
-}
-
-
-
-
-
-
-@media (max-width:576px){
-    .logincard{
-        transform: translate(-1%);
-        overflow: hidden;
+  }
+  
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
     }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
 
-   
-}
+
+  @media (max-width:576px){
+    
+  }

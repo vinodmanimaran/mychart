@@ -1,4 +1,87 @@
-.reset-input{
-    display: flex;
-    flex-direction: column;
+.reset-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('../../assets/login.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  padding: 1rem;
+  background-repeat: no-repeat;
+  }
+  
+  .reset-card {
+    padding: 40px;
+    width: 400px;
+    border-radius: 20px !important  ;
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.1); 
+    background-color: #fff; 
+    animation: fadeInUp 0.6s ease; 
+  }
+  
+  .reset-logo {
+    margin-bottom: 10px;
+    font-size: 36px;
+    font-weight: 700;
+    color: #333;
+    margin-top: -20px;
+
+    text-align: center;
+  }
+  
+  .reset-input {
+    margin-bottom: 30px;
+  }
+  
+  .reset-button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 30px;
+    background-color: #4caf50; 
+    color: #fff; 
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+  }
+  
+  .reset-button:hover {
+    background-color: #388e3c; 
+  }
+  
+  .reset-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+
+  .login-content {
+    text-align: center;
+    margin-top: 20px; /* Adjust this value as needed */
+}
+
+.login-content h5 {
+    font-size: 16px; /* Adjust this value as needed */
+}
+
+.login-content a {
+    color: #007bff; 
+    text-decoration: none;
+}
+
+.login-content a:hover {
+    text-decoration: underline;
 }

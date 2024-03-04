@@ -1,8 +1,9 @@
 import React, { useState,useEffect } from 'react';
-import { Button, TextField, Alert, Card, CardContent, CardActionArea, CardActions } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Button, TextField,  Card, CardContent, CardActions, IconButton} from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Reset.css'
+import { Visibility,VisibilityOff } from '@mui/icons-material';
 
 const API="https://backend-api-ebon-nu.vercel.app" || "http://localhost:4040"
 
@@ -12,11 +13,8 @@ const Reset = () => {
         identifier: '',
         newPassword: ''
     });
-    const [alertMessage, setAlertMessage] = useState('');
-    const [alertSeverity, setAlertSeverity] = useState('success');
-    const[loading,setLoading]=useState(true)
+    const [showPassword, setShowPassword] = useState(false); 
     const navigate = useNavigate();
-
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
     };
@@ -26,71 +24,63 @@ const Reset = () => {
             const res = await axios.post(`${API}/auth/resetpassword`, data, {
                 withCredentials: true,
             });
-            setAlertMessage('Password reset successful!');
-            setAlertSeverity('success');
             navigate('/login');
+            alert("Reset Password successful")
             console.log(res.data);
         } catch (e) {
-            setAlertMessage(e.response.data.message);
-            setAlertSeverity('error');
+            alert(e.response.data)
             console.log(e.response.data);
         }
     };
 
 
-    useEffect(() => {
-        const skeletonTimer = setTimeout(() => {
-          setLoading(false);
-        }, 1000);
-        return () => clearTimeout(skeletonTimer);
-      }, []);
+    
 
 
     return (
-        <div>
-            <div>
-                <Card>
-                    <CardContent>
+        <div className="reset-container">
+        <Card className="reset-card">
+          <CardContent>
+            <h5 className="reset-logo">PEEJIYEM</h5>
+            <TextField
+              fullWidth
+              name="identifier"
+              label="Username or Email"
+              variant="outlined"
+              margin="normal"
+              value={data.identifier}
+              onChange={handleChange}
+              className="reset-input"
+            />
+            <TextField
+              fullWidth
+              type={showPassword ? "text" : "password"}
+              name="newPassword"
+              label="New Password"
+              variant="outlined"
+              margin="normal"
+              value={data.newPassword}
+              onChange={handleChange}
+              InputProps={{
+                endAdornment: (
+                  <IconButton onClick={() => setShowPassword(!showPassword)} size="small">
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                )
+              }}
+              className="reset-input"
+            />
+          </CardContent>
+          <CardActions sx={{ justifyContent: 'center' }}>
+            <button variant="contained" onClick={handleReset} className="reset-button">Reset Password</button>
+          </CardActions>
 
-                    <div className="logo">
-                    <h3>PEEJIYEM</h3>
-                </div>
-                        <div className="reset-input">
-                        <TextField
-                    name="identifier"
-                    label="Username or Email"
-                    variant="outlined"
-                    margin="normal"
-                    value={data.identifier}
-                    onChange={handleChange}
-                />
-                <TextField
-                    type="password"
-                    name="newPassword"
-                    label="New Password"
-                    variant="outlined"
-                    margin="normal"
-                    value={data.newPassword}
-                    onChange={handleChange}
-                />
-                
-                        </div>
-                    </CardContent>
-                        <CardActions>
-                             
-                <Button variant="contained" onClick={handleReset}>
-                    Reset Password
-                </Button>
-                        </CardActions>
-                </Card>
-               
-                {alertMessage && (
-                    <Alert severity={alertSeverity} onClose={() => setAlertMessage('')}>
-                        {alertMessage}
-                    </Alert>
-                )}
-            </div>
-        </div>
+          <div className="login-content">
+            <h5>If you Already have password? <Link  to="/login"> Login</Link></h5>
+          </div>
+        </Card>
+       
+      </div>
     );
 };
 
