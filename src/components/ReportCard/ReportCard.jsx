@@ -21,7 +21,7 @@ const ReportCard = ({ primary, secondary, iconPrimary, color, footerData, iconFo
   >      <CardContent>
         {loading ? (
           <Grid container justifyContent="space-between" alignItems="center">
-            <Grid item>
+            <Grid item >
               <Skeleton variant="text" width={150} height={40}  animation="wave" />
               <Skeleton variant="text" width={100} height={20}  animation="wave" />
             </Grid>

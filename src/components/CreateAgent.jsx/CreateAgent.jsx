@@ -43,7 +43,6 @@ const CreateAgent = () => {
   const handleSubmit = async () => {
     try {
       const response = await axios.post(`${API}/agent/createagents`, formData,{withCredentials:true});
-      console.log(response.data);
       alert("Agent Created successfully");
       handleClose();
     } catch (error) {

@@ -23,11 +23,7 @@ const Agenttable = () => {
         const response = await axios.get(`${API}/agent/getallagent`,{withCredentials:true});
         const names = response.data.agents.map(agent => agent.name);
         setAgentNames(names);
-
-        console.log(names)
-
         setAgents(response.data.agents);
-       
         setLoading(false);
       } catch (error) {
         console.error('Error fetching agents:', error);

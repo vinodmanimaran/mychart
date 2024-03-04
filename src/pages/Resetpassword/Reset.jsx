@@ -26,7 +26,6 @@ const Reset = () => {
             });
             navigate('/login');
             alert("Reset Password successful")
-            console.log(res.data);
         } catch (e) {
             alert(e.response.data)
             console.log(e.response.data);

@@ -28,7 +28,6 @@ const Login = ({ handleLogin }) => {
             handleLogin(); 
 
             navigate("/");
-            console.log(res.data);
         } catch (e) {
             alert(e.response.data)
             console.log(e.response.data);

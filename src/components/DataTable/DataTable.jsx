@@ -203,7 +203,6 @@ const DataTable = () => {
       customBodyRender: (value) => (
         <div className='data-cell'>
             {value}
-            {console.log("savings",value)}
         </div>
     )
     } },
@@ -246,7 +245,6 @@ useEffect(() => {
     rowsPerPageOptions: [5, 10, 20],
     serverSide: false,
     onColumnSortChange: (changedColumn, direction) => {
-      console.log(`Sort changed: Column=${changedColumn}, Direction=${direction}`);
     }
   };
 

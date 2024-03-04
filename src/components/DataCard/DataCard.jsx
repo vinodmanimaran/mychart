@@ -46,7 +46,6 @@ const DataCard = () => {
       try {
         const response = await axios.get(`${API}/dashboard`,{withCredentials:true});
         const revenueChartData = response.data; 
-        console.log('Revenue Chart Data:', revenueChartData); 
         setDashboardData(revenueChartData); 
         setLoading(false); 
       } catch (error) {
@@ -58,12 +57,6 @@ const DataCard = () => {
   }, []);
 
 
-  useEffect(() => {
-    const skeletonTimer = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-    return () => clearTimeout(skeletonTimer);
-  }, []);
 
   return (
     <div>
