@@ -69,7 +69,7 @@ const Login = ({ handleLogin }) => {
               className="login-input"
             />
 <div className="forgot-block">
-                            <Link to="/resetpassword" className='forgot-text'>Forgot Password?</Link>
+                            <Link to="/resetpassword" className='forgot-text' >Forgot Password?</Link>
                         </div>
           </CardContent>
           <CardActions sx={{ justifyContent: 'center' }}>

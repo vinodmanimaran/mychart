@@ -62,6 +62,10 @@
     display: flex;
     justify-content: flex-end;
   }
+
+  .forgot-text{
+    color: #333333;
+  }
   
   
   @keyframes fadeInUp {
