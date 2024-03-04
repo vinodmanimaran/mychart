@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-const API="https://backend-api-ebon-nu.vercel.app" || "http://localhost:4040"
+const API_URL = import.meta.env.VITE_API || "http://localhost:4040";
 
 
 const DataTable = () => {
@@ -135,8 +135,8 @@ const DataTable = () => {
         </div>
     )
     } },
-    { name: 'place', label: 'Place', options: {} },
-    { name: 'district', label: 'District', options: {
+    { name: 'Place', label: 'Place', options: {} },
+    { name: 'District', label: 'District', options: {
       customBodyRender: (value) => (
         <div className='data-cell'>
             {value}
@@ -199,10 +199,11 @@ const DataTable = () => {
         </div>
     )
     } },
-    { name: 'Estimated_saving_amount', label: 'Estimated Saving amount', options: {
+    { name: 'savingamount', label: 'Estimated Saving amount', options: {
       customBodyRender: (value) => (
         <div className='data-cell'>
             {value}
+            {console.log("savings",value)}
         </div>
     )
     } },

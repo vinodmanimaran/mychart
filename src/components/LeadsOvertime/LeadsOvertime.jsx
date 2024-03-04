@@ -7,7 +7,7 @@ import styled from '@emotion/styled';
 import { useTheme } from '@emotion/react';
 import SalesLineCard from './SalesLineCard';
 
-const API = "https://backend-api-ebon-nu.vercel.app" || "http://localhost:4040";
+const API_URL = import.meta.env.VITE_API || "http://localhost:4040";
 
 const FlatCardBlock = styled(Grid)(({ theme }) => ({
   padding: '25px 25px',
@@ -78,7 +78,7 @@ const LeadsOvertime = () => {
                           label: 'Total Leads'
                         },
                         {
-                          value: `${dashboardData?.liveDuration}`,
+                          value: `${dashboardData?.averagePerDay}`,
                           label: 'Avg. Leads/Day'
                         }
                       ]}

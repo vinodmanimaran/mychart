@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Button, Dialog, DialogContent, DialogActions, TextField, Skeleton } from '@mui/material';
 import axios from 'axios';
 
-const API="https://backend-api-ebon-nu.vercel.app" || "http://localhost:4040"
+
+const API_URL = import.meta.env.VITE_API || "http://localhost:4040";
+
+
 
 const CreateAgent = () => {
   const [open, setOpen] = useState(false);

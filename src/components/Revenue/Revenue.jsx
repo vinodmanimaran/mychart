@@ -20,6 +20,8 @@ const RevenuChartCard = ({ chartData }) => {
     if (chartData && chartData.leadsPercentage) {
       const seriesData = Object.values(chartData.leadsPercentage);
       const labels = Object.keys(chartData.leadsPercentage);
+      
+      console.log(labels)
       const serviceColors = {
         Jobs: '#FF5733',
         Loans: '#33FFC6',
@@ -38,6 +40,13 @@ const RevenuChartCard = ({ chartData }) => {
           },
           xaxis: {
             categories: labels,
+            labels:{
+              style:{
+                fontSize: '15px',
+                fontWeight: 'bold',
+                colors: '#333'
+              }
+            }
           },
           colors: labels.map(service => serviceColors[service]),
           responsive: [

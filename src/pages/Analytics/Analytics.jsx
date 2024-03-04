@@ -11,7 +11,7 @@ import Layout from '../../components/Layout/Layout'
 import axios from 'axios';
 import DataTable from '../../components/DataTable/DataTable';
 
-const API="https://backend-api-ebon-nu.vercel.app" || "http://localhost:4040"
+const API_URL = import.meta.env.VITE_API || "http://localhost:4040";
 
 const Analytics = () => {
   const [dashboardData, setDashboardData] = useState(null);

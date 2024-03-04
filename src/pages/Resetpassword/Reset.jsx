@@ -5,7 +5,7 @@ import axios from 'axios';
 import './Reset.css'
 import { Visibility,VisibilityOff } from '@mui/icons-material';
 
-const API="https://backend-api-ebon-nu.vercel.app" || "http://localhost:4040"
+const API_URL = import.meta.env.VITE_API || "http://localhost:4040";
 
 
 const Reset = () => {
