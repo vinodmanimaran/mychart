@@ -49,9 +49,6 @@ const LeadsOvertime = () => {
     };
   }, []);
 
-
-
-
   return (
     <div>
       <Grid container spacing={2}>

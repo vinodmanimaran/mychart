@@ -15,19 +15,19 @@ export const gridSpacing = 3;
 
 const getIcon = (service) => {
   switch (service) {
-    case 'jobs':
+    case 'Jobs':
       return MonetizationOnTwoToneIcon;
-    case 'loans':
+    case 'Loans':
       return AccountBalanceTwoToneIcon;
-    case 'creditCards':
+    case 'CreditCard':
       return CreditCardTwoToneIcon;
-    case 'realEstate':
+    case 'RealEstate':
       return HomeTwoToneIcon;
-    case 'savingsInvestments':
+    case 'Savings':
       return ThumbUpAltTwoToneIcon;
-    case 'otherInsurances':
+    case 'Insurance':
       return AssignmentTurnedInTwoToneIcon;
-    case 'vehicleInsurances':
+    case 'VehicleInsurance':
       return DirectionsCarTwoToneIcon;
     default:
       return null;
