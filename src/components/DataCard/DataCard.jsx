@@ -19,15 +19,15 @@ const getIcon = (service) => {
       return MonetizationOnTwoToneIcon;
     case 'Loans':
       return AccountBalanceTwoToneIcon;
-    case 'CreditCard':
+    case 'Credit Card':
       return CreditCardTwoToneIcon;
-    case 'RealEstate':
+    case 'Real Estate':
       return HomeTwoToneIcon;
     case 'Microsavings & Investments':
       return ThumbUpAltTwoToneIcon;
     case 'Insurance':
       return AssignmentTurnedInTwoToneIcon;
-    case 'VehicleInsurance':
+    case 'Vehicle Insurance':
       return DirectionsCarTwoToneIcon;
     default:
       return null;
