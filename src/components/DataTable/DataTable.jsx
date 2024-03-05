@@ -230,12 +230,6 @@ const DataTable = () => {
 
 
 
-useEffect(() => {
-  const skeletonTimer = setTimeout(() => {
-    setLoading(false);
-  }, 1000);
-  return () => clearTimeout(skeletonTimer);
-}, []);
 
   const options = {
     filter: true,
@@ -255,11 +249,11 @@ useEffect(() => {
       {loading ? (
         <>
           <Skeleton variant="text" height={50} animation="wave" />
-          <Skeleton variant="rectangular" animation="wave" height={400} />
+          <Skeleton variant="rect" animation="wave" height={400} />
         </>
       ) : (
         <MUIDataTable
-          title={"Dashboard Table"}
+          title={"Leads Data"}
           data={data}
           columns={columns}
           options={options}
